@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_base/utils/app_strings.dart';
-import 'package:poke_base/view/PokemonListPage.dart';
+import 'package:poke_base/view/pokemon_list_page.dart';
 
 void main() {
   runApp(const MyApp());
