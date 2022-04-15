@@ -20,7 +20,7 @@ class PokemonList {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['next'] = nextRequestUrl;
     if (pokemon != null) {
-      data['results'] = pokemon!.map((v) => v.toJson()).toList();
+      data['results'] = pokemon?.map((v) => v.toJson()).toList();
     }
     return data;
   }

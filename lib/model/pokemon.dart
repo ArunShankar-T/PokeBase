@@ -4,13 +4,20 @@ class Pokemon {
 
   Pokemon({this.name, this.url});
 
-  Pokemon.fromJson(Map<String, String> json) {
-    name = json['name'];
-    url = json['url'];
+  int pokemonId = 0;
+
+  Pokemon.fromJson(Map<String, dynamic> json) {
+    try {
+      name = json['name'];
+      url = json['url'];
+      pokemonId = int.parse(url?.split("/")[6] ?? "0");
+    } catch (e) {
+      print(e);
+    }
   }
 
-  Map<String, String?> toJson() {
-    final Map<String, String?> data = Map<String, String?>();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['url'] = url;
     return data;

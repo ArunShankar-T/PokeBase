@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
-import 'package:poke_base/model/pokemon.dart';
+import 'package:poke_base/model/pokemon_list.dart';
+import 'package:poke_base/services/remote_services.dart';
 
 class PokemonController extends GetxController {
-  var cartItems = List.empty(growable: true).obs;
+  var pokemonList = PokemonList().obs;
   var isLoading = true.obs;
+  var isError = false.obs;
 
   @override
   void onInit() {
@@ -12,8 +14,17 @@ class PokemonController extends GetxController {
   }
 
   void fetchPokemon() async {
-    isLoading(true);
-    //Fetch from Api
-    isLoading(false);
+    try {
+      isLoading(true);
+      //Fetch from Api
+      pokemonList.value = await RemoteServices().fetchPokemon();
+      if (isError.value) {
+        isError(false);
+      }
+    } catch (e) {
+      isError(true);
+    } finally {
+      isLoading(false);
+    }
   }
 }
