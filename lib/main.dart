@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:poke_base/utils/app_strings.dart';
 import 'package:poke_base/view/pokemon_list_page.dart';
 
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: AppStrings.APP_TITLE,
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(primarySwatch: Colors.red),
         debugShowCheckedModeBanner: false,
         home: const PokemonListPage());
   }

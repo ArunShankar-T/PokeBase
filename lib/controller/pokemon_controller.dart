@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:poke_base/model/pokemon.dart';
 import 'package:poke_base/model/pokemon_list.dart';
 import 'package:poke_base/services/remote_services.dart';
 
