@@ -59,8 +59,7 @@ class PokemonListPage extends StatelessWidget {
                             boxShadow: [BoxShadow(color: Colors.black12)],
                             borderRadius: BorderRadius.circular(50)),
                         child: Center(
-                            child: Image.asset("assets/images/pokemon_ball.png",
-                                width: 30, height: 30, fit: BoxFit.cover)),
+                            child: Icon(Icons.favorite_border, size: 17)),
                       ))
                 ]));
           },
