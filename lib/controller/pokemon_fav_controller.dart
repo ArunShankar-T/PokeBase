@@ -4,6 +4,7 @@ import 'package:poke_base/model/pokemon_favorite.dart';
 
 class PokemonFavController extends GetxController {
   var favPokemonList = <PokemonFavorite>[].obs;
+  var isLoading = true.obs;
   SQLiteHelper sqLiteDb = SQLiteHelper.getSQLiteHelper();
 
   @override
@@ -17,6 +18,8 @@ class PokemonFavController extends GetxController {
       favPokemonList.value = await sqLiteDb.getFavPokemon();
     } catch (e) {
       print(e);
+    } finally {
+      isLoading(false);
     }
   }
 

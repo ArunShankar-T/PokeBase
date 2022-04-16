@@ -10,7 +10,7 @@ class ViewUtils {
   }
 
   static Widget loader() {
-    return const Center(child: CircularProgressIndicator(strokeWidth: 1));
+    return const Center(child: CircularProgressIndicator(strokeWidth: 2));
   }
 
   static stringToBytes(String imageBase64){

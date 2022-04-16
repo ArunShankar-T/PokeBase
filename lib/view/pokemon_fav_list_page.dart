@@ -36,17 +36,25 @@ class PokemonFavListPage extends StatelessWidget {
       const SizedBox(height: 20),
       Expanded(child: Obx(() {
         var favList = _pokemonFavController.favPokemonList;
-        if (favList.isEmpty) {
+        if (_pokemonFavController.isLoading.value) {
+          return ViewUtils.loader();
+        } else if (favList.isEmpty) {
           return Center(
             child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/connection_error.png',
+                  Image.asset('assets/images/pokemon_ball.png',
                       width: 60, height: 60),
                   const SizedBox(height: 20),
-                  const Text(AppStrings.API_ERROR)
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Text(
+                      AppStrings.FAVORITE_POKEMON_EMPTY_MESSAGE,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
                 ]),
           );
         } else {
@@ -87,17 +95,15 @@ class PokemonFavListPage extends StatelessWidget {
                             Expanded(
                                 flex: 2,
                                 child: Container(
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(75),
-                                          bottomLeft: Radius.circular(75))),
-                                  child: Image.memory(
-                                    ViewUtils.stringToBytes(
-                                        pokemonItem.imageBase64),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ))
+                                    decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(75),
+                                            bottomLeft: Radius.circular(75))),
+                                    child: Image.memory(
+                                        ViewUtils.stringToBytes(
+                                            pokemonItem.imageBase64),
+                                        fit: BoxFit.cover)))
                           ]),
                       GestureDetector(
                         onTap: () {

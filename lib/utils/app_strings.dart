@@ -6,4 +6,6 @@ class AppStrings {
   static const String API_ERROR =
       "Something went wrong while fetching pokemon list";
   static const String FAVORITE_POKEMON = "Favorite Pokemon";
+  static const String FAVORITE_POKEMON_EMPTY_MESSAGE =
+      "You have not mark any Pokemon as favorite...";
 }
