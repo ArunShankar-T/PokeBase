@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:poke_base/utils/app_strings.dart';
 
@@ -9,5 +11,9 @@ class ViewUtils {
 
   static Widget loader() {
     return const Center(child: CircularProgressIndicator(strokeWidth: 1));
+  }
+
+  static stringToBytes(String imageBase64){
+    return const Base64Codec().decode(imageBase64);
   }
 }

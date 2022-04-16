@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:poke_base/controller/pokemon_controller.dart';
 import 'package:poke_base/utils/view_utils.dart';
 import 'package:poke_base/view/pokemon_detail_page.dart';
+import 'package:poke_base/view/pokemon_fav_list_page.dart';
 
 import '../utils/app_strings.dart';
 
@@ -26,13 +27,25 @@ class PokemonListPage extends StatelessWidget {
     return Scaffold(
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const SizedBox(height: 80),
-      const Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(AppStrings.APP_TITLE,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 24)))),
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(AppStrings.APP_TITLE,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 24))),
+            Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: IconButton(
+                    icon: const Icon(Icons.favorite),
+                    onPressed: () {
+                      Get.to(const PokemonFavListPage())?.then((value) {
+                        _pokemonController.updateFav();
+                      });
+                    }))
+          ]),
       const SizedBox(height: 20),
       Expanded(child: GetBuilder<PokemonController>(builder: (_) {
         hasMore = _pokemonController.pokemonList.value.nextRequestUrl != null;

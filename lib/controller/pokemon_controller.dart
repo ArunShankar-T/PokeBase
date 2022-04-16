@@ -24,12 +24,11 @@ class PokemonController extends GetxController {
       //Fetch from Api
       var pokemonListResponse =
           await RemoteServices().fetchPokemon(nextRequestUrl);
-      favPokemonIds = await sqLiteDb.getFavPokemonIds();
       var tempPokemonList = pokemonList.value;
       tempPokemonList.nextRequestUrl = pokemonListResponse.nextRequestUrl;
       tempPokemonList.pokemon.insertAll(
           tempPokemonList.pokemon.length, pokemonListResponse.pokemon);
-      _updateFav(tempPokemonList);
+      await updateFav();
       if (isError.value) {
         isError(false);
       }
@@ -48,31 +47,28 @@ class PokemonController extends GetxController {
       if (await sqLiteDb.insertFavPokemon(PokemonFavorite(pokemonItem.pokemonId,
               pokemonItem.name ?? "", base64Image ?? "")) !=
           0) {
-        favPokemonIds.addIf(!favPokemonIds.contains(pokemonItem.pokemonId),
-            pokemonItem.pokemonId);
-        _updateFav(pokemonList.value);
-        update();
+        await updateFav();
       }
     } catch (e) {
-      print("$e");
+      print(e);
     }
   }
 
   removeFavPokemon(int pokemonId) async {
     try {
       if (await sqLiteDb.deleteFavPokemon(pokemonId) != 0) {
-        favPokemonIds.remove(pokemonId);
-        _updateFav(pokemonList.value);
-        update();
+        await updateFav();
       }
     } catch (e) {
-      print("$e");
+      print(e);
     }
   }
 
-  void _updateFav(PokemonList pokemonList) {
-    for (var element in pokemonList.pokemon) {
+  Future<void> updateFav() async {
+    favPokemonIds = await sqLiteDb.getFavPokemonIds();
+    for (var element in pokemonList.value.pokemon) {
       element.isFav = favPokemonIds.contains(element.pokemonId);
     }
+    update();
   }
 }
