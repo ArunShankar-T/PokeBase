@@ -75,36 +75,34 @@ class PokemonFavListPage extends StatelessWidget {
                     width: double.infinity,
                     height: 150,
                     child: Stack(children: [
-                      Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(pokemonItem.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Expanded(
-                                flex: 2,
-                                child: Container(
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(75),
-                                            bottomLeft: Radius.circular(75))),
-                                    child: Image.memory(
-                                        ViewUtils.stringToBytes(
-                                            pokemonItem.imageBase64),
-                                        fit: BoxFit.cover)))
-                          ]),
+                      Center(
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(75),
+                                    topRight: Radius.circular(75),
+                                    topLeft: Radius.circular(75),
+                                    bottomLeft: Radius.circular(75))),
+                            child: Image.memory(
+                                ViewUtils.stringToBytes(
+                                    pokemonItem.imageBase64),
+                                height: 100,
+                                width: 100,
+                                fit: BoxFit.cover)),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(bottom: 5),
+                        alignment: Alignment.bottomCenter,
+                        child: Text(pokemonItem.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold)),
+                      ),
                       GestureDetector(
                         onTap: () {
                           _pokemonFavController
