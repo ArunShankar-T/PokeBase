@@ -43,7 +43,7 @@ class PokemonListPage extends StatelessWidget {
                 child: IconButton(
                     icon: const Icon(Icons.favorite),
                     onPressed: () {
-                      Get.to(const PokemonFavListPage())?.then((value) {
+                      Get.to(() => const PokemonFavListPage())?.then((value) {
                         _pokemonController.updateFav();
                       });
                     }))
@@ -102,7 +102,9 @@ class PokemonListPage extends StatelessWidget {
                                       child: Padding(
                                           padding:
                                               const EdgeInsets.only(left: 10),
-                                          child: Text(pokemonItem.name ?? "",
+                                          child: Text(
+                                              ViewUtils.firstLetterToUpperCase(
+                                                  pokemonItem.name ?? ""),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(

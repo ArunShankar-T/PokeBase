@@ -50,9 +50,10 @@ class PokemonDetailPage extends StatelessWidget {
                                 margin: const EdgeInsets.only(top: 8),
                                 child: Obx(() {
                                   return Text(
-                                      _pokemonDetailController
-                                              .pokemonDetails.value.name ??
-                                          "",
+                                      ViewUtils.firstLetterToUpperCase(
+                                          _pokemonDetailController
+                                                  .pokemonDetails.value.name ??
+                                              ""),
                                       style: const TextStyle(
                                           fontSize: 22,
                                           color: Colors.white,
@@ -162,7 +163,7 @@ class PokemonDetailPage extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white38, width: 1),
                 borderRadius: const BorderRadius.all(Radius.circular(3))),
-            child: Text(info.toString(),
+            child: Text(ViewUtils.firstLetterToUpperCase(info),
                 style: const TextStyle(fontSize: 14, color: Colors.white70),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -173,7 +174,7 @@ class PokemonDetailPage extends StatelessWidget {
       {String? avatarString, Color? avatarBgColor}) {
     return Chip(
         backgroundColor: bgColor,
-        label: Text(abilityName,
+        label: Text(ViewUtils.firstLetterToUpperCase(abilityName),
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: labelColor, fontSize: 15)),
         avatar: avatarString != null

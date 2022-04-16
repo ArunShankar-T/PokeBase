@@ -13,7 +13,13 @@ class ViewUtils {
     return const Center(child: CircularProgressIndicator(strokeWidth: 2));
   }
 
-  static stringToBytes(String imageBase64){
+  static stringToBytes(String imageBase64) {
     return const Base64Codec().decode(imageBase64);
+  }
+
+  static firstLetterToUpperCase(String text) {
+    return text.isNotEmpty
+        ? text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
+        : "";
   }
 }

@@ -94,7 +94,8 @@ class PokemonFavListPage extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.only(bottom: 5),
                         alignment: Alignment.bottomCenter,
-                        child: Text(pokemonItem.name,
+                        child: Text(
+                            ViewUtils.firstLetterToUpperCase(pokemonItem.name),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
