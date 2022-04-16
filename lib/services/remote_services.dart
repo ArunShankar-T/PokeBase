@@ -37,4 +37,14 @@ class RemoteServices {
       throw Exception(e.toString());
     }
   }
+
+  Future<String?> networkImageToBase64(String imageUrl) async {
+    try {
+      http.Response response = await http.get(Uri.parse(imageUrl));
+      final bytes = response.bodyBytes;
+      return (bytes != null ? base64Encode(bytes) : null);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

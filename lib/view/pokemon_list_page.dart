@@ -34,7 +34,7 @@ class PokemonListPage extends StatelessWidget {
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 24)))),
       const SizedBox(height: 20),
-      Expanded(child: Obx(() {
+      Expanded(child: GetBuilder<PokemonController>(builder: (_) {
         hasMore = _pokemonController.pokemonList.value.nextRequestUrl != null;
         if (_pokemonController.isError.value) {
           return Column(
@@ -101,12 +101,9 @@ class PokemonListPage extends StatelessWidget {
                                               bottomRight:
                                                   Radius.circular(10))),
                                       child: CachedNetworkImage(
-                                          imageUrl: AppStrings.POKEMON_IMAGE_URL
-                                              .replaceAll(
-                                                  AppStrings
-                                                      .POKEMON_ID_PLACEHOLDER,
-                                                  pokemonItem.pokemonId
-                                                      .toString()),
+                                          imageUrl:
+                                              ViewUtils.getPokemonImageUrl(
+                                                  pokemonItem.pokemonId),
                                           width: 100,
                                           fit: BoxFit.fitHeight,
                                           placeholder: (BuildContext context,
@@ -120,17 +117,33 @@ class PokemonListPage extends StatelessWidget {
                                                   size: 50)),
                                     ))
                               ]),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              margin: const EdgeInsets.only(right: 10, top: 10),
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(boxShadow: const [
-                                BoxShadow(color: Colors.black12)
-                              ], borderRadius: BorderRadius.circular(50)),
-                              child: const Center(
-                                  child: Icon(Icons.favorite_border, size: 17)),
+                          GestureDetector(
+                            onTap: () {
+                              if (pokemonItem.isFav) {
+                                _pokemonController
+                                    .removeFavPokemon(pokemonItem.pokemonId);
+                              } else {
+                                _pokemonController.addFavPokemon(pokemonItem);
+                              }
+                            },
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(right: 10, top: 10),
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(boxShadow: const [
+                                  BoxShadow(color: Colors.black12)
+                                ], borderRadius: BorderRadius.circular(50)),
+                                child: Center(
+                                    child: _pokemonController.pokemonList.value
+                                            .pokemon[index].isFav
+                                        ? const Icon(Icons.favorite_outlined,
+                                            size: 17)
+                                        : const Icon(Icons.favorite_border,
+                                            size: 17)),
+                              ),
                             ),
                           )
                         ]),

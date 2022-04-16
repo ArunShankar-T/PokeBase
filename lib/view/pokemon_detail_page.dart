@@ -51,9 +51,7 @@ class PokemonDetailPage extends StatelessWidget {
                       ),
                       Center(
                           child: CachedNetworkImage(
-                              imageUrl: AppStrings.POKEMON_IMAGE_URL.replaceAll(
-                                  AppStrings.POKEMON_ID_PLACEHOLDER,
-                                  pokemonId.toString()),
+                              imageUrl: ViewUtils.getPokemonImageUrl(pokemonId),
                               height: 300,
                               fit: BoxFit.fitHeight,
                               placeholder: (BuildContext context, String url) =>

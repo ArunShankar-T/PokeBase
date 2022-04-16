@@ -29,6 +29,7 @@ class Pokemon {
   Pokemon({this.name, this.url});
 
   int pokemonId = 0;
+  bool isFav = false;
 
   Pokemon.fromJson(Map<String, dynamic> json) {
     try {
