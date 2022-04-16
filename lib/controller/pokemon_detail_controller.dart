@@ -10,6 +10,7 @@ class PokemonDetailController extends GetxController {
   fetchPokemonDetails(int pokemonId) async {
     try {
       isLoading(true);
+      await Future.delayed(const Duration(milliseconds: 500));
       //Fetch from Api
       pokemonDetails.value =
           await RemoteServices().fetchPokemonDetails(pokemonId);

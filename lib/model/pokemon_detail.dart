@@ -4,7 +4,6 @@ class PokemonDetails {
   int? height;
   int? id;
   String? name;
-  int? order;
   List<Stats>? stats;
   List<Types>? types;
   int? weight;
@@ -15,7 +14,6 @@ class PokemonDetails {
       this.height,
       this.id,
       this.name,
-      this.order,
       this.stats,
       this.types,
       this.weight});
@@ -31,7 +29,6 @@ class PokemonDetails {
     height = json['height'];
     id = json['id'];
     name = json['name'];
-    order = json['order'];
     if (json['stats'] != null) {
       stats = <Stats>[];
       json['stats'].forEach((v) {
@@ -56,7 +53,6 @@ class PokemonDetails {
     data['height'] = height;
     data['id'] = id;
     data['name'] = name;
-    data['order'] = order;
     if (stats != null) {
       data['stats'] = stats!.map((v) => v.toJson()).toList();
     }

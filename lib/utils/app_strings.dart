@@ -8,4 +8,8 @@ class AppStrings {
   static const String FAVORITE_POKEMON = "Favorite Pokemon";
   static const String FAVORITE_POKEMON_EMPTY_MESSAGE =
       "You have not mark any Pokemon as favorite...";
+  static const String POKEMON_HEIGHT = "Height : ";
+  static const String POKEMON_WEIGHT = "Weight : ";
+  static const String POKEMON_ABILITY = "Abilities";
+  static const String POKEMON_STATS = "Stats";
 }

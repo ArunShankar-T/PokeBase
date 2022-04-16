@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:poke_base/controller/pokemon_fav_controller.dart';
+import 'package:poke_base/utils/app_strings.dart';
 import 'package:poke_base/utils/view_utils.dart';
-
-import '../utils/app_strings.dart';
 
 class PokemonFavListPage extends StatelessWidget {
   const PokemonFavListPage({Key? key}) : super(key: key);
