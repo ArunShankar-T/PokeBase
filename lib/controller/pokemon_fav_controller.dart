@@ -15,6 +15,7 @@ class PokemonFavController extends GetxController {
 
   fetchFavPokemon({String? nextRequestUrl}) async {
     try {
+      await Future.delayed(const Duration(milliseconds: 500));
       favPokemonList.value = await sqLiteDb.getFavPokemon();
     } catch (e) {
       print(e);
