@@ -29,6 +29,7 @@ class PokemonDetailController extends GetxController {
     }
   }
 
+  /// Converts json string into [PokemonDetails] object [pokemonDetailJson].
   setPokemonDetails(String pokemonDetailJson) {
     try {
       pokemonDetails.value =

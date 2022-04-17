@@ -78,7 +78,8 @@
         await db.execute(&quot;CREATE TABLE $tablePokemon (&quot;
             &quot;$columnId INTEGER PRIMARY KEY,&quot;
             &quot;$columnName TEXT,&quot;
-            &quot;$columnIMageBase64 TEXT&quot;
+            &quot;$columnImageUrl TEXT,&quot;
+            &quot;$columnPokemonDetails TEXT&quot;
             &quot;)&quot;);
       },
     );

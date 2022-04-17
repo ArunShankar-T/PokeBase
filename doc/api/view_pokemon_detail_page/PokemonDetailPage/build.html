@@ -107,9 +107,15 @@ and</li>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  int pokemonId = Get.arguments;
+  int pokemonId = Get.arguments[0];
+  String pokemonDetailJson =
+      (Get.arguments as List).length &gt; 1 ? Get.arguments[1] : &quot;&quot;;
   var _pokemonDetailController = Get.find&lt;PokemonDetailController&gt;();
-  _pokemonDetailController.fetchPokemonDetails(pokemonId);
+  if (pokemonDetailJson.isEmpty) {
+    _pokemonDetailController.fetchPokemonDetails(pokemonId);
+  } else {
+    _pokemonDetailController.setPokemonDetails(pokemonDetailJson);
+  }
   return WillPopScope(
     onWillPop: _onWillPop,
     child: Scaffold(
