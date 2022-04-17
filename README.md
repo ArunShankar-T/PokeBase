@@ -1,16 +1,27 @@
 # poke_base
 
-A database of pokemons
+A database of pokemon
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is all about pokemon. We can browse through the list of pokemon and one can see the details of a pokemon by selection it. There is an option to select the favorite pokemon and it will be stored on local database. The list of favorite pokemon will be available even there is no network connection. 
 
-A few resources to get you started if this is your first Flutter project:
+**Note: This project was written from scratch. Didn't use any boilerplate code. **
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Libraries & Tools Used
+
+### Dependencies
+
+* [GetX](https://pub.dev/packages/get)
+* [Http](https://pub.dev/packages/http)
+* [CachedNetworkImage](https://pub.dev/packages/cached_network_image)
+* [SQLite](https://pub.dev/packages/sqflite)
+* [ConnectivityPlus](https://pub.dev/packages/connectivity_plus)
+
+### Dev Dependencies
+
+* [Test](https://pub.dev/packages/test)
+* [Mockito](https://pub.dev/packages/mockito)
+* [Build Runner](https://pub.dev/packages/build_runner)
+
