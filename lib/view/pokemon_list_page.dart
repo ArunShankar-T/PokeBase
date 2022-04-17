@@ -52,7 +52,7 @@ class PokemonListPage extends StatelessWidget {
             children: [
               const Padding(
                   padding: EdgeInsets.only(left: 20),
-                  child: Text(AppStrings.APP_TITLE,
+                  child: Text(AppStrings.appTitle,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 24))),
               Padding(
@@ -80,7 +80,7 @@ class PokemonListPage extends StatelessWidget {
                   Image.asset('assets/images/connection_error.png',
                       width: 60, height: 60),
                   const SizedBox(height: 20),
-                  const Text(AppStrings.API_ERROR)
+                  const Text(AppStrings.apiError)
                 ]);
           } else if (_pokemonListController.isLoading.value && !hasMore) {
             return ViewUtils.loader();

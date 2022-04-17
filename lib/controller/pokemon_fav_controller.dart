@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:poke_base/helper/sq_lite_helper.dart';
 import 'package:poke_base/model/pokemon_favorite.dart';
@@ -10,6 +11,7 @@ class PokemonFavController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     /// Fetches the Favorite pokemon.
     fetchFavPokemon();
   }
@@ -20,7 +22,7 @@ class PokemonFavController extends GetxController {
       await Future.delayed(const Duration(milliseconds: 500));
       favPokemonList.value = await sqLiteDb.getFavPokemon();
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     } finally {
       isLoading(false);
     }
@@ -33,7 +35,7 @@ class PokemonFavController extends GetxController {
         favPokemonList.removeWhere((element) => element.id == pokemonId);
       }
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
 }

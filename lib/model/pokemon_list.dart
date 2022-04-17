@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 
 class PokemonList {
   String? nextRequestUrl;
@@ -37,7 +38,7 @@ class Pokemon {
       url = json['url'];
       pokemonId = int.parse(url?.split("/")[6] ?? "0");
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
 

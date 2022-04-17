@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class PokemonFavorite {
   late int id;
   late String name;
@@ -11,7 +13,7 @@ class PokemonFavorite {
       imageBase64 = json['image_base64'] ?? "";
       id = json['id'] ?? 0;
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
 

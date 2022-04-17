@@ -122,10 +122,10 @@ class PokemonDetailPage extends StatelessWidget {
                                                         .spaceEvenly,
                                                 children: [
                                                   _getDetailContainer(AppStrings
-                                                          .POKEMON_HEIGHT +
+                                                          .pokemonHeight +
                                                       "${(_pokemonDetail.height ?? 0) / 10} m"),
                                                   _getDetailContainer(AppStrings
-                                                          .POKEMON_WEIGHT +
+                                                          .pokemonWeight +
                                                       "${(_pokemonDetail.weight ?? 0) / 10.toDouble()} kg"),
                                                 ]),
                                             Row(
@@ -147,7 +147,7 @@ class PokemonDetailPage extends StatelessWidget {
                           Image.asset('assets/images/connection_error.png',
                               width: 60, height: 60),
                           const SizedBox(height: 20),
-                          const Text(AppStrings.API_ERROR,
+                          const Text(AppStrings.apiError,
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),
                               textAlign: TextAlign.center)
@@ -240,7 +240,7 @@ class PokemonDetailPage extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(AppStrings.POKEMON_ABILITY,
+              Text(AppStrings.pokemonAbility,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -276,7 +276,7 @@ class PokemonDetailPage extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(AppStrings.POKEMON_STATS,
+              Text(AppStrings.pokemonStats,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,

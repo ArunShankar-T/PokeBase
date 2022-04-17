@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:poke_base/helper/sq_lite_helper.dart';
 import 'package:poke_base/model/pokemon_favorite.dart';
@@ -15,6 +16,7 @@ class PokemonListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     /// To initiate fetch pokemon api.
     fetchPokemon();
   }
@@ -55,7 +57,7 @@ class PokemonListController extends GetxController {
         await updateFav();
       }
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
 
@@ -66,10 +68,9 @@ class PokemonListController extends GetxController {
         await updateFav();
       }
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
-
 
   /// Update the Favorite Icon on pokemon list.
   Future<void> updateFav() async {

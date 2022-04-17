@@ -27,7 +27,7 @@ class PokemonFavListPage extends StatelessWidget {
         ),
         const Expanded(
           child: Center(
-            child: Text(AppStrings.FAVORITE_POKEMON,
+            child: Text(AppStrings.favoritePokemon,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
           ),
         )
@@ -50,7 +50,7 @@ class PokemonFavListPage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                      AppStrings.FAVORITE_POKEMON_EMPTY_MESSAGE,
+                      AppStrings.favoritePokemonEmptyMessage,
                       textAlign: TextAlign.center,
                     ),
                   )

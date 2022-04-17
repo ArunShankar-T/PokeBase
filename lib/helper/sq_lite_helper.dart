@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:poke_base/model/pokemon_favorite.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -41,7 +42,7 @@ class SQLiteHelper {
         },
       );
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return null;
   }
@@ -53,7 +54,7 @@ class SQLiteHelper {
       var db = await getDb();
       return await db?.insert(tablePokemon, pokemonFavorite.toMap()) ?? 0;
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return 0;
   }
@@ -69,7 +70,7 @@ class SQLiteHelper {
         _pokemonFavorite.add(pokemonFavorite);
       });
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return _pokemonFavorite;
   }
@@ -85,7 +86,7 @@ class SQLiteHelper {
         _pokemonFavoriteIds.add(element.values.first as int);
       }
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return _pokemonFavoriteIds;
   }
@@ -99,7 +100,7 @@ class SQLiteHelper {
               ?.delete(tablePokemon, where: '$columnId = ?', whereArgs: [id]) ??
           0;
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return 0;
   }

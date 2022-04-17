@@ -26,11 +26,11 @@ class RemoteServices {
         if (response.statusCode == 200) {
           return PokemonList.fromJson(json.decode(response.body));
         } else {
-          throw Exception(AppStrings.EXCEPTION_UNKNOWN);
+          throw Exception(AppStrings.exceptionUnknown);
         }
       } else {
         ViewUtils.showNoNetworkMessage();
-        throw Exception(AppStrings.EXCEPTION_NO_NETWORK);
+        throw Exception(AppStrings.exceptionNoNetwork);
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -52,7 +52,7 @@ class RemoteServices {
         }
       } else {
         ViewUtils.showNoNetworkMessage();
-        throw Exception(AppStrings.EXCEPTION_NO_NETWORK);
+        throw Exception(AppStrings.exceptionNoNetwork);
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -68,7 +68,7 @@ class RemoteServices {
       if (await networkController.isNetworkConnected()) {
         http.Response response = await http.get(Uri.parse(imageUrl));
         final bytes = response.bodyBytes;
-        return (bytes != null ? base64Encode(bytes) : null);
+        return base64Encode(bytes);
       } else {
         return null;
       }

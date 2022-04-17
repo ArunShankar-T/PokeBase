@@ -7,8 +7,8 @@ import 'package:poke_base/utils/app_strings.dart';
 class ViewUtils {
   /// To build the image url of pokemon using [pokemonId].
   static getPokemonImageUrl(int pokemonId) {
-    return AppStrings.POKEMON_IMAGE_URL
-        .replaceAll(AppStrings.POKEMON_ID_PLACEHOLDER, pokemonId.toString());
+    return AppStrings.pokemonImageUrl
+        .replaceAll(AppStrings.pokemonIdPlaceholder, pokemonId.toString());
   }
 
   /// Returns a loader widget.

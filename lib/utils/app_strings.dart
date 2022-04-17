@@ -1,17 +1,17 @@
 class AppStrings {
-  static const String APP_TITLE = "Poke Base";
-  static const String POKEMON_ID_PLACEHOLDER = ":id";
-  static const String POKEMON_IMAGE_URL =
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$POKEMON_ID_PLACEHOLDER.png";
-  static const String API_ERROR =
+  static const String appTitle = "Poke Base";
+  static const String pokemonIdPlaceholder = ":id";
+  static const String pokemonImageUrl =
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$pokemonIdPlaceholder.png";
+  static const String apiError =
       "Something went wrong while fetching pokemon list";
-  static const String FAVORITE_POKEMON = "Favorite Pokemon";
-  static const String FAVORITE_POKEMON_EMPTY_MESSAGE =
+  static const String favoritePokemon = "Favorite Pokemon";
+  static const String favoritePokemonEmptyMessage =
       "You have not mark any Pokemon as favorite...";
-  static const String POKEMON_HEIGHT = "Height : ";
-  static const String POKEMON_WEIGHT = "Weight : ";
-  static const String POKEMON_ABILITY = "Abilities";
-  static const String POKEMON_STATS = "Stats";
-  static const String EXCEPTION_UNKNOWN = "Something went wrong while fetching pokemon";
-  static const String EXCEPTION_NO_NETWORK = "No Network Connection";
+  static const String pokemonHeight = "Height : ";
+  static const String pokemonWeight = "Weight : ";
+  static const String pokemonAbility = "Abilities";
+  static const String pokemonStats = "Stats";
+  static const String exceptionUnknown = "Something went wrong while fetching pokemon";
+  static const String exceptionNoNetwork = "No Network Connection";
 }

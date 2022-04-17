@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut(() => NetworkController());
     return GetMaterialApp(
-        title: AppStrings.APP_TITLE,
+        title: AppStrings.appTitle,
         theme: ThemeData(primarySwatch: Colors.red),
         debugShowCheckedModeBanner: false,
         home: const PokemonListPage());
