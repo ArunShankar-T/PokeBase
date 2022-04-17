@@ -4,7 +4,7 @@ A database of pokemon
 
 ## Getting Started
 
-This project is all about pokemon. We can browse through the list of pokemon and one can see the details of a pokemon by selection it. There is an option to select the favorite pokemon and it will be stored on local database. The list of favorite pokemon will be available even there is no network connection. 
+This project is all about pokemon. We can browse through the list of pokemons and one can see the details of a pokemon by selection it. There is an option to select the favorite pokemon and it will be stored on local database. The list and details of favorite pokemons will be available even there is no network connection. 
 
 **Note: This project was written from scratch. Didn't use any boilerplate code. **
 
