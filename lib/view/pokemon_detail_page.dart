@@ -13,142 +13,159 @@ class PokemonDetailPage extends StatelessWidget {
     int pokemonId = Get.arguments;
     var _pokemonDetailController = Get.find<PokemonDetailController>();
     _pokemonDetailController.fetchPokemonDetails(pokemonId);
-    return Scaffold(
-      body: Container(
-        color: Colors.black,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-                child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.only(top: 50),
-                    decoration: BoxDecoration(
-                        color: Colors.yellow.withOpacity(0.1),
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10))),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Stack(children: [
-                            GestureDetector(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(boxShadow: const [
-                                      BoxShadow(color: Colors.black12)
-                                    ], borderRadius: BorderRadius.circular(50)),
-                                    margin: const EdgeInsets.only(left: 10),
-                                    child: const Icon(Icons.arrow_back,
-                                        size: 30, color: Colors.white))),
-                            Container(
-                                alignment: Alignment.topCenter,
-                                margin: const EdgeInsets.only(top: 8),
-                                child: Obx(() {
-                                  return Text(
-                                      ViewUtils.firstLetterToUpperCase(
-                                          _pokemonDetailController
-                                                  .pokemonDetails.value.name ??
-                                              ""),
-                                      style: const TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center);
-                                }))
-                          ]),
-                          Center(
-                              child: CachedNetworkImage(
-                                  imageUrl:
-                                      ViewUtils.getPokemonImageUrl(pokemonId),
-                                  height: 200,
-                                  fit: BoxFit.fitHeight,
-                                  placeholder:
-                                      (BuildContext context, String url) =>
-                                          const Center(
-                                              child: CircularProgressIndicator(
-                                                  strokeWidth: 1.0)),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error, size: 50))),
-                          Obx(() {
-                            var _pokemonDetail =
-                                _pokemonDetailController.pokemonDetails.value;
-                            return (_pokemonDetailController.isError.value ||
-                                    _pokemonDetailController.isLoading.value)
-                                ? Container()
-                                : Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5),
-                                    decoration: BoxDecoration(
-                                        color: Colors.black12.withOpacity(0.4),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                              color: Colors.black12,
-                                              offset: Offset(0.0, 1.0),
-                                              blurRadius: 6.0)
-                                        ],
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10))),
-                                    width: double.infinity,
-                                    height: 90,
-                                    child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                _getDetailContainer(AppStrings
-                                                        .POKEMON_HEIGHT +
-                                                    "${(_pokemonDetail.height ?? 0) / 10} m"),
-                                                _getDetailContainer(AppStrings
-                                                        .POKEMON_WEIGHT +
-                                                    "${(_pokemonDetail.weight ?? 0) / 10.toDouble()} kg"),
-                                              ]),
-                                          Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: _getPokemonTypes())
-                                        ]));
-                          })
-                        ]))),
-            Expanded(
-              child: Obx(() {
-                if (_pokemonDetailController.isError.value) {
-                  return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/connection_error.png',
-                            width: 60, height: 60),
-                        const SizedBox(height: 20),
-                        const Text(AppStrings.API_ERROR,
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                            textAlign: TextAlign.center)
-                      ]);
-                } else if (_pokemonDetailController.isLoading.value) {
-                  return ViewUtils.loader();
-                } else {
-                  return SingleChildScrollView(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: Container(
+          color: Colors.black,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(top: 50),
+                      decoration: BoxDecoration(
+                          color: Colors.yellow.withOpacity(0.1),
+                          borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10))),
                       child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [_buildAbilities(), _buildStats()]));
-                }
-              }),
-            )
-          ],
+                          children: [
+                            Stack(children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          boxShadow: const [
+                                            BoxShadow(color: Colors.black12)
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      margin: const EdgeInsets.only(left: 10),
+                                      child: const Icon(Icons.arrow_back,
+                                          size: 30, color: Colors.white))),
+                              Container(
+                                  alignment: Alignment.topCenter,
+                                  margin: const EdgeInsets.only(top: 8),
+                                  child: Obx(() {
+                                    return _pokemonDetailController
+                                                .isError.value ||
+                                            _pokemonDetailController
+                                                .isLoading.value
+                                        ? Container()
+                                        : Text(
+                                            ViewUtils.firstLetterToUpperCase(
+                                                _pokemonDetailController
+                                                        .pokemonDetails
+                                                        .value
+                                                        .name ??
+                                                    ""),
+                                            style: const TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center);
+                                  }))
+                            ]),
+                            Center(
+                                child: CachedNetworkImage(
+                                    imageUrl:
+                                        ViewUtils.getPokemonImageUrl(pokemonId),
+                                    height: 200,
+                                    fit: BoxFit.fitHeight,
+                                    placeholder: (BuildContext context,
+                                            String url) =>
+                                        const Center(
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 1.0)),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error, size: 50))),
+                            Obx(() {
+                              var _pokemonDetail =
+                                  _pokemonDetailController.pokemonDetails.value;
+                              return (_pokemonDetailController.isError.value ||
+                                      _pokemonDetailController.isLoading.value)
+                                  ? Container()
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      decoration: BoxDecoration(
+                                          color:
+                                              Colors.black12.withOpacity(0.4),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                offset: Offset(0.0, 1.0),
+                                                blurRadius: 6.0)
+                                          ],
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10))),
+                                      width: double.infinity,
+                                      height: 90,
+                                      child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  _getDetailContainer(AppStrings
+                                                          .POKEMON_HEIGHT +
+                                                      "${(_pokemonDetail.height ?? 0) / 10} m"),
+                                                  _getDetailContainer(AppStrings
+                                                          .POKEMON_WEIGHT +
+                                                      "${(_pokemonDetail.weight ?? 0) / 10.toDouble()} kg"),
+                                                ]),
+                                            Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: _getPokemonTypes())
+                                          ]));
+                            })
+                          ]))),
+              Expanded(
+                child: Obx(() {
+                  if (_pokemonDetailController.isError.value) {
+                    return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/connection_error.png',
+                              width: 60, height: 60),
+                          const SizedBox(height: 20),
+                          const Text(AppStrings.API_ERROR,
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
+                              textAlign: TextAlign.center)
+                        ]);
+                  } else if (_pokemonDetailController.isLoading.value) {
+                    return ViewUtils.loader();
+                  } else {
+                    return SingleChildScrollView(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [_buildAbilities(), _buildStats()]));
+                  }
+                }),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -268,5 +285,10 @@ class PokemonDetailPage extends StatelessWidget {
               const SizedBox(height: 10),
               Wrap(spacing: 10, children: statsWidget)
             ]));
+  }
+
+  Future<bool> _onWillPop() async {
+    Get.closeCurrentSnackbar();
+    return true;
   }
 }

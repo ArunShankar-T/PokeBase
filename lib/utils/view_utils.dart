@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:poke_base/utils/app_strings.dart';
 
 class ViewUtils {
@@ -21,5 +22,16 @@ class ViewUtils {
     return text.isNotEmpty
         ? text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
         : "";
+  }
+
+  static showNoNetworkMessage() {
+    Future.delayed(const Duration(milliseconds: 50), () {
+      Get.snackbar("No Connection", "Please connect to internet",
+          animationDuration: const Duration(milliseconds: 200),
+          duration: const Duration(seconds: 1),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          isDismissible: true);
+    });
   }
 }

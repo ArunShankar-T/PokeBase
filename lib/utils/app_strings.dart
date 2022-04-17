@@ -12,4 +12,6 @@ class AppStrings {
   static const String POKEMON_WEIGHT = "Weight : ";
   static const String POKEMON_ABILITY = "Abilities";
   static const String POKEMON_STATS = "Stats";
+  static const String EXCEPTION_UNKNOWN = "Something went wrong while fetching pokemon";
+  static const String EXCEPTION_NO_NETWORK = "No Network Connection";
 }

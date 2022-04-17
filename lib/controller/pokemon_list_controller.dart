@@ -5,7 +5,7 @@ import 'package:poke_base/model/pokemon_list.dart';
 import 'package:poke_base/services/remote_services.dart';
 import 'package:poke_base/utils/view_utils.dart';
 
-class PokemonController extends GetxController {
+class PokemonListController extends GetxController {
   var pokemonList = PokemonList(pokemon: <Pokemon>[]).obs;
   var favPokemonIds = List.empty();
   var isLoading = true.obs;

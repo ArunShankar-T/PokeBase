@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:poke_base/controller/pokemon_controller.dart';
+import 'package:poke_base/controller/network_controller.dart';
 import 'package:poke_base/controller/pokemon_detail_controller.dart';
+import 'package:poke_base/controller/pokemon_list_controller.dart';
 import 'package:poke_base/utils/view_utils.dart';
 import 'package:poke_base/view/pokemon_detail_page.dart';
 import 'package:poke_base/view/pokemon_fav_list_page.dart';
@@ -14,16 +15,22 @@ class PokemonListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _pokemonController = Get.put(PokemonController());
-    Get.put(PokemonDetailController());
-    bool hasMore = _pokemonController.pokemonList.value.nextRequestUrl != null;
+    var _pokemonListController = Get.put(PokemonListController());
+    var networkController = Get.find<NetworkController>();
     ScrollController _scrollController = ScrollController();
-    _scrollController.addListener(() {
+    Get.put(PokemonDetailController());
+    bool hasMore =
+        _pokemonListController.pokemonList.value.nextRequestUrl != null;
+    _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        _pokemonController.fetchPokemon(
-            nextRequestUrl:
-                _pokemonController.pokemonList.value.nextRequestUrl);
+        if (await networkController.isNetworkConnected()) {
+          _pokemonListController.fetchPokemon(
+              nextRequestUrl:
+                  _pokemonListController.pokemonList.value.nextRequestUrl);
+        } else {
+          ViewUtils.showNoNetworkMessage();
+        }
       }
     });
     return Scaffold(
@@ -41,17 +48,21 @@ class PokemonListPage extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: IconButton(
-                    icon: const Icon(Icons.favorite),
+                    icon: const Icon(Icons.favorite, color: Colors.pink),
                     onPressed: () {
                       Get.to(() => const PokemonFavListPage())?.then((value) {
-                        _pokemonController.updateFav();
+                        if (Get.isSnackbarOpen) {
+                          Get.closeAllSnackbars();
+                        }
+                        _pokemonListController.updateFav();
                       });
                     }))
           ]),
       const SizedBox(height: 20),
-      Expanded(child: GetBuilder<PokemonController>(builder: (_) {
-        hasMore = _pokemonController.pokemonList.value.nextRequestUrl != null;
-        if (_pokemonController.isError.value) {
+      Expanded(child: GetBuilder<PokemonListController>(builder: (_) {
+        hasMore =
+            _pokemonListController.pokemonList.value.nextRequestUrl != null;
+        if (_pokemonListController.isError.value) {
           return Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -61,10 +72,11 @@ class PokemonListPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Text(AppStrings.API_ERROR)
               ]);
-        } else if (_pokemonController.isLoading.value && !hasMore) {
+        } else if (_pokemonListController.isLoading.value && !hasMore) {
           return ViewUtils.loader();
         } else {
-          var listSize = _pokemonController.pokemonList.value.pokemon.length;
+          var listSize =
+              _pokemonListController.pokemonList.value.pokemon.length;
           return SizedBox(
             height: 200.0,
             child: ListView.builder(
@@ -74,7 +86,7 @@ class PokemonListPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 if (index < listSize) {
                   var pokemonItem =
-                      _pokemonController.pokemonList.value.pokemon[index];
+                      _pokemonListController.pokemonList.value.pokemon[index];
                   return Card(
                       color: Colors.redAccent,
                       shadowColor: Colors.black,
@@ -116,6 +128,7 @@ class PokemonListPage extends StatelessWidget {
                                   Expanded(
                                       flex: 2,
                                       child: Container(
+                                        height: double.infinity,
                                         decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.only(
@@ -145,10 +158,11 @@ class PokemonListPage extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 if (pokemonItem.isFav) {
-                                  _pokemonController
+                                  _pokemonListController
                                       .removeFavPokemon(pokemonItem.pokemonId);
                                 } else {
-                                  _pokemonController.addFavPokemon(pokemonItem);
+                                  _pokemonListController
+                                      .addFavPokemon(pokemonItem);
                                 }
                               },
                               child: Align(
@@ -162,7 +176,7 @@ class PokemonListPage extends StatelessWidget {
                                     BoxShadow(color: Colors.black12)
                                   ], borderRadius: BorderRadius.circular(50)),
                                   child: Center(
-                                      child: _pokemonController.pokemonList
+                                      child: _pokemonListController.pokemonList
                                               .value.pokemon[index].isFav
                                           ? const Icon(Icons.favorite_outlined,
                                               size: 17)
@@ -170,7 +184,7 @@ class PokemonListPage extends StatelessWidget {
                                               size: 17)),
                                 ),
                               ),
-                            )
+                            ),
                           ]),
                         ),
                       ));

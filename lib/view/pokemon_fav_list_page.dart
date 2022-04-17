@@ -75,24 +75,25 @@ class PokemonFavListPage extends StatelessWidget {
                     height: 150,
                     child: Stack(children: [
                       Center(
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(75),
-                                    topRight: Radius.circular(75),
-                                    topLeft: Radius.circular(75),
-                                    bottomLeft: Radius.circular(75))),
-                            child: Image.memory(
-                                ViewUtils.stringToBytes(
-                                    pokemonItem.imageBase64),
-                                height: 100,
-                                width: 100,
-                                fit: BoxFit.cover)),
-                      ),
+                          child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(75),
+                                      topRight: Radius.circular(75),
+                                      topLeft: Radius.circular(75),
+                                      bottomLeft: Radius.circular(75))),
+                              child: pokemonItem.imageBase64.isNotEmpty
+                                  ? Image.memory(
+                                      ViewUtils.stringToBytes(
+                                          pokemonItem.imageBase64),
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover)
+                                  : const Icon(Icons.error, size: 50))),
                       Container(
-                        padding: EdgeInsets.only(bottom: 5),
+                        padding: const EdgeInsets.only(bottom: 5),
                         alignment: Alignment.bottomCenter,
                         child: Text(
                             ViewUtils.firstLetterToUpperCase(pokemonItem.name),
