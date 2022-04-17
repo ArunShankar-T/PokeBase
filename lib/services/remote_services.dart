@@ -15,6 +15,9 @@ class RemoteServices {
   static var pokemonListEndPoint = pokemonBaseUrl + "pokemon?offset=0&limit=20";
   static var pokemonDetailsEndPoint = pokemonBaseUrl + "pokemon/";
 
+  /// Fetches pokemon list from the url.
+  ///
+  /// By passing [nextRequestUrl] with Offset and Limit, the api will return the result.
   Future<PokemonList> fetchPokemon(String? nextRequestUrl) async {
     try {
       if (await networkController.isNetworkConnected()) {
@@ -34,6 +37,9 @@ class RemoteServices {
     }
   }
 
+  /// Fetches pokemon detail from the url.
+  ///
+  /// By passing [pokemonId] the api will return the result.
   Future<PokemonDetails> fetchPokemonDetails(int pokemonId) async {
     try {
       if (await networkController.isNetworkConnected()) {
@@ -53,6 +59,10 @@ class RemoteServices {
     }
   }
 
+  /// Fetches pokemon image from the image url.
+  ///
+  /// By passing [imageUrl] the api will return the image and
+  /// it will be encode as [base64Encode] to store the image in database.
   Future<String?> networkImageToBase64(String imageUrl) async {
     try {
       if (await networkController.isNetworkConnected()) {

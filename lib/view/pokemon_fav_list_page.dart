@@ -86,7 +86,7 @@ class PokemonFavListPage extends StatelessWidget {
                                       bottomLeft: Radius.circular(75))),
                               child: pokemonItem.imageBase64.isNotEmpty
                                   ? Image.memory(
-                                      ViewUtils.stringToBytes(
+                                      ViewUtils.base64StringToBytes(
                                           pokemonItem.imageBase64),
                                       height: 100,
                                       width: 100,

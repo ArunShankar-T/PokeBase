@@ -10,11 +10,13 @@ class SQLiteHelper {
   Database? _database;
   static SQLiteHelper? _sqLiteHelper;
 
+  /// Returns the SQLiteHelper Instance as Singleton.
   static getSQLiteHelper() {
     _sqLiteHelper ??= SQLiteHelper();
     return _sqLiteHelper;
   }
 
+  /// Returns the database Instance as Singleton.
   Future<Database?> getDb() async {
     if (_database == null) {
       return await initializeDatabase();
@@ -22,6 +24,7 @@ class SQLiteHelper {
     return _database;
   }
 
+  /// Returns the database instance.
   Future<Database?> initializeDatabase() async {
     try {
       var dir = await getDatabasesPath();
@@ -43,6 +46,8 @@ class SQLiteHelper {
     return null;
   }
 
+  /// To insert a record into the table [tablePokemon], takes [PokemonFavorite] as params.
+  /// Returns the id of the last inserted row.
   Future<int> insertFavPokemon(PokemonFavorite pokemonFavorite) async {
     try {
       var db = await getDb();
@@ -53,6 +58,7 @@ class SQLiteHelper {
     return 0;
   }
 
+  /// To get all the record from [tablePokemon].
   Future<List<PokemonFavorite>> getFavPokemon() async {
     List<PokemonFavorite> _pokemonFavorite = [];
     try {
@@ -68,6 +74,7 @@ class SQLiteHelper {
     return _pokemonFavorite;
   }
 
+  /// To get all the [columnId] from [tablePokemon].
   Future<List<int>> getFavPokemonIds() async {
     List<int> _pokemonFavoriteIds = [];
     try {
@@ -83,6 +90,8 @@ class SQLiteHelper {
     return _pokemonFavoriteIds;
   }
 
+  /// To delete the records from [tablePokemon] having where [columnId] is [id].
+  /// Returns the number of rows affected.
   Future<int> deleteFavPokemon(int id) async {
     try {
       var db = await getDb();

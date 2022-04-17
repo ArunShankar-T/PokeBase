@@ -10,9 +10,11 @@ class PokemonFavController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    /// Fetches the Favorite pokemon.
     fetchFavPokemon();
   }
 
+  /// Fetches the Favorite pokemon from the database.
   fetchFavPokemon({String? nextRequestUrl}) async {
     try {
       await Future.delayed(const Duration(milliseconds: 500));
@@ -24,6 +26,7 @@ class PokemonFavController extends GetxController {
     }
   }
 
+  /// To delete the pokemon from the database which has the [pokemonId].
   removeFavPokemon(int pokemonId) async {
     try {
       if (await sqLiteDb.deleteFavPokemon(pokemonId) != 0) {

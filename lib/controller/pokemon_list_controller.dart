@@ -15,9 +15,12 @@ class PokemonListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    /// To initiate fetch pokemon api.
     fetchPokemon();
   }
 
+  /// To fetch pokemon list from api. Takes [nextRequestUrl] as params.
+  /// Returns [PokemonList].
   fetchPokemon({String? nextRequestUrl}) async {
     try {
       isLoading(true);
@@ -40,8 +43,10 @@ class PokemonListController extends GetxController {
     update();
   }
 
+  /// To add the given item [Pokemon] into the database.
   addFavPokemon(Pokemon pokemonItem) async {
     try {
+      /// This will convert the image into base64 string to store it in database.
       var base64Image = await RemoteServices().networkImageToBase64(
           ViewUtils.getPokemonImageUrl(pokemonItem.pokemonId));
       if (await sqLiteDb.insertFavPokemon(PokemonFavorite(pokemonItem.pokemonId,
@@ -54,6 +59,7 @@ class PokemonListController extends GetxController {
     }
   }
 
+  /// To delete the pokemon from the database which has the [id].
   removeFavPokemon(int pokemonId) async {
     try {
       if (await sqLiteDb.deleteFavPokemon(pokemonId) != 0) {
@@ -64,6 +70,8 @@ class PokemonListController extends GetxController {
     }
   }
 
+
+  /// Update the Favorite Icon on pokemon list.
   Future<void> updateFav() async {
     favPokemonIds = await sqLiteDb.getFavPokemonIds();
     for (var element in pokemonList.value.pokemon) {

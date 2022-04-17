@@ -13,6 +13,8 @@ class NetworkController extends GetxController {
   void onInit() {
     super.onInit();
     initConnectivity();
+
+    /// Adds a subscription to this stream.
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
@@ -36,6 +38,7 @@ class NetworkController extends GetxController {
     _connectionStatus = result;
   }
 
+  /// Returns the current [ConnectivityResult].
   Future<bool> isNetworkConnected() async {
     if (_connectionStatus == null) {
       return await _connectivity.checkConnectivity() != ConnectivityResult.none;
@@ -46,6 +49,7 @@ class NetworkController extends GetxController {
 
   @override
   void dispose() {
+    ///Cancels this subscription.
     _connectivitySubscription.cancel();
     super.dispose();
   }

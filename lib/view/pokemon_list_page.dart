@@ -21,6 +21,9 @@ class PokemonListPage extends StatelessWidget {
     Get.put(PokemonDetailController());
     bool hasMore =
         _pokemonListController.pokemonList.value.nextRequestUrl != null;
+
+    /// Implemented ScrollController with ListView.Builder to achieve pagination.
+    /// This block will be invoked once the list view touches the last item.
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {

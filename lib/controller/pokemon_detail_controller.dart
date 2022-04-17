@@ -7,6 +7,8 @@ class PokemonDetailController extends GetxController {
   var isLoading = true.obs;
   var isError = false.obs;
 
+  /// Fetches the pokemon details from the api by using [pokemonId].
+  /// Returns the [PokemonDetails] from the api.
   fetchPokemonDetails(int pokemonId) async {
     try {
       isLoading(true);
