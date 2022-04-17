@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:poke_base/controller/network_controller.dart';
 import 'package:poke_base/helper/sq_lite_helper.dart';
+import 'package:poke_base/model/pokemon_detail.dart';
 import 'package:poke_base/model/pokemon_favorite.dart';
 import 'package:poke_base/model/pokemon_list.dart';
 import 'package:poke_base/services/remote_services.dart';
@@ -11,6 +15,7 @@ class PokemonListController extends GetxController {
   var favPokemonIds = List.empty();
   var isLoading = true.obs;
   var isError = false.obs;
+  var networkController = Get.find<NetworkController>();
   SQLiteHelper sqLiteDb = SQLiteHelper.getSQLiteHelper();
 
   @override
@@ -48,11 +53,16 @@ class PokemonListController extends GetxController {
   /// To add the given item [Pokemon] into the database.
   addFavPokemon(Pokemon pokemonItem) async {
     try {
-      /// This will convert the image into base64 string to store it in database.
-      var base64Image = await RemoteServices().networkImageToBase64(
-          ViewUtils.getPokemonImageUrl(pokemonItem.pokemonId));
-      if (await sqLiteDb.insertFavPokemon(PokemonFavorite(pokemonItem.pokemonId,
-              pokemonItem.name ?? "", base64Image ?? "")) !=
+      PokemonDetails? pokemonDetails;
+      if (await networkController.isNetworkConnected()) {
+        pokemonDetails =
+            await RemoteServices().fetchPokemonDetails(pokemonItem.pokemonId);
+      }
+      if (await sqLiteDb.insertFavPokemon(PokemonFavorite(
+              pokemonItem.pokemonId,
+              pokemonItem.name ?? "",
+              ViewUtils.getPokemonImageUrl(pokemonItem.pokemonId),
+              pokemonDetails != null ? json.encode(pokemonDetails) : "")) !=
           0) {
         await updateFav();
       }

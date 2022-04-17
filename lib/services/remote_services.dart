@@ -58,22 +58,4 @@ class RemoteServices {
       throw Exception(e.toString());
     }
   }
-
-  /// Fetches pokemon image from the image url.
-  ///
-  /// By passing [imageUrl] the api will return the image and
-  /// it will be encode as [base64Encode] to store the image in database.
-  Future<String?> networkImageToBase64(String imageUrl) async {
-    try {
-      if (await networkController.isNetworkConnected()) {
-        http.Response response = await http.get(Uri.parse(imageUrl));
-        final bytes = response.bodyBytes;
-        return base64Encode(bytes);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
 }

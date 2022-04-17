@@ -10,9 +10,15 @@ class PokemonDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int pokemonId = Get.arguments;
+    int pokemonId = Get.arguments[0];
+    String pokemonDetailJson =
+        (Get.arguments as List).length > 1 ? Get.arguments[1] : "";
     var _pokemonDetailController = Get.find<PokemonDetailController>();
-    _pokemonDetailController.fetchPokemonDetails(pokemonId);
+    if (pokemonDetailJson.isEmpty) {
+      _pokemonDetailController.fetchPokemonDetails(pokemonId);
+    } else {
+      _pokemonDetailController.setPokemonDetails(pokemonDetailJson);
+    }
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

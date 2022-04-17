@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:poke_base/model/pokemon_detail.dart';
 import 'package:poke_base/services/remote_services.dart';
@@ -20,6 +23,21 @@ class PokemonDetailController extends GetxController {
         isError(false);
       }
     } catch (e) {
+      isError(true);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  setPokemonDetails(String pokemonDetailJson) {
+    try {
+      pokemonDetails.value =
+          PokemonDetails.fromJson(json.decode(pokemonDetailJson));
+      if (isError.value) {
+        isError(false);
+      }
+    } catch (e) {
+      debugPrint("$e");
       isError(true);
     } finally {
       isLoading(false);

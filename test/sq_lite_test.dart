@@ -35,7 +35,7 @@ void main() {
 
     // Use Mockito to return a successful response when it calls the
     // provided http.Client.
-    var pokemonFavItem = PokemonFavorite(1, "bulbasaur", "");
+    var pokemonFavItem = PokemonFavorite(1, "bulbasaur", "", "");
     when(db.insert(tablePokemon, pokemonFavItem.toMap())).thenAnswer((_) async {
       return 1;
     });

@@ -56,7 +56,7 @@ class PokemonListPage extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 24))),
               Padding(
-                  padding: const EdgeInsets.only(right: 20),
+                  padding: const EdgeInsets.only(right: 5),
                   child: IconButton(
                       icon: const Icon(Icons.favorite, color: Colors.pink),
                       onPressed: () {
@@ -108,7 +108,7 @@ class PokemonListPage extends StatelessWidget {
                             Future.delayed(const Duration(milliseconds: 150),
                                 () {
                               Get.to(() => const PokemonDetailPage(),
-                                  arguments: pokemonItem.pokemonId);
+                                  arguments: [pokemonItem.pokemonId]);
                             });
                           },
                           splashColor: Colors.white,

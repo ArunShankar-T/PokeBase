@@ -3,14 +3,17 @@ import 'package:flutter/foundation.dart';
 class PokemonFavorite {
   late int id;
   late String name;
-  late String imageBase64;
+  late String imageUrl;
+  late String pokemonDetailMapString;
 
-  PokemonFavorite(this.id, this.name, this.imageBase64);
+  PokemonFavorite(
+      this.id, this.name, this.imageUrl, this.pokemonDetailMapString);
 
   PokemonFavorite.fromMap(Map<String, dynamic> json) {
     try {
       name = json['name'] ?? "";
-      imageBase64 = json['image_base64'] ?? "";
+      imageUrl = json['image_url'] ?? "";
+      pokemonDetailMapString = json['pokemon_details'] ?? "";
       id = json['id'] ?? 0;
     } catch (e) {
       debugPrint("$e");
@@ -21,7 +24,8 @@ class PokemonFavorite {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['id'] = id;
-    data['image_base64'] = imageBase64;
+    data['image_url'] = imageUrl;
+    data['pokemon_details'] = pokemonDetailMapString;
     return data;
   }
 }

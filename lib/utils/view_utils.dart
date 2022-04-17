@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:poke_base/utils/app_strings.dart';
@@ -14,11 +12,6 @@ class ViewUtils {
   /// Returns a loader widget.
   static Widget loader() {
     return const Center(child: CircularProgressIndicator(strokeWidth: 2));
-  }
-
-  /// Returns a bytes array from base64 string.
-  static base64StringToBytes(String imageBase64) {
-    return const Base64Codec().decode(imageBase64);
   }
 
   /// Make the first letter as UpperCase and Returns tha string [text].

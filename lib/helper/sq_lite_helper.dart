@@ -5,7 +5,8 @@ import 'package:sqflite/sqflite.dart';
 const String tablePokemon = 'pokemon';
 const String columnId = 'id';
 const String columnName = 'name';
-const String columnIMageBase64 = 'image_base64';
+const String columnImageUrl = 'image_url';
+const String columnPokemonDetails = 'pokemon_details';
 
 class SQLiteHelper {
   Database? _database;
@@ -37,7 +38,8 @@ class SQLiteHelper {
           await db.execute("CREATE TABLE $tablePokemon ("
               "$columnId INTEGER PRIMARY KEY,"
               "$columnName TEXT,"
-              "$columnIMageBase64 TEXT"
+              "$columnImageUrl TEXT,"
+              "$columnPokemonDetails TEXT"
               ")");
         },
       );
